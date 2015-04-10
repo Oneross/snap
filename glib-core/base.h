@@ -139,6 +139,21 @@
 //  #undef _POSIX_MONOTONIC_CLOCK
 //#endif
 
+// for Snapworld, switch is defined to include util.h:WriteN()
+//#if (defined(GLib_UNIX) && !defined(SWIG)) || (defined(SWIG_SW))
+#if defined(SWIG_SW)
+  #define SW_WRITEN
+#endif
+
+// for backtrace dump in G++, change SW_TRACE to 1
+#define SW_TRACE 0
+
+// for Snap.py, switch 'no abort' is defined and NDEBUG is turned off
+#if defined(SW_SNAPPY)
+  #define SW_NOABORT
+  #undef NDEBUG
+#endif
+
 #include "bd.h"
 #include "fl.h"
 #include "dt.h"
@@ -156,22 +171,15 @@
 #include "tm.h"
 #include "shash.h"
 #include "os.h"
-#include "console.h"
 
-#include "app.h"
 #include "env.h"
 #include "wch.h"
-#include "xdt.h"
 #include "xfl.h"
 
 #include "blobbs.h"
-#include "fds.h"
 #include "lx.h"
-#include "macro.h"
-#include "pp.h"
 #include "url.h"
 
-#include "exp.h"
 #include "http.h"
 #include "html.h"
 #include "md5.h"
